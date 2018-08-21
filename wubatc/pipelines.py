@@ -15,10 +15,41 @@ class WubatcPipeline(object):
         connection = pymongo.MongoClient(settings.get('MONGODB_SERVER'),settings.get('MONGODB_PORT'))
         db = connection[settings.get('MONGODB_DB')]
         self.collection = db[settings.get('MONGODB_COLLECTION')]
-
+        
+    
+        
+        
+	
+	
+        
+	
     def process_item(self, item, spider):
-        self.collection.insert(dict(item))
-        return item
+#        self.collection.insert(dict(item))
+#        return item
+
+
+
+	
+
+        firstdata = self.collection.find({},{"link":1,"_id":0}).limit(20)
+        linked =item['link']
+        
+        for i in firstdata:
+            repeat = 0
+            if i['link'] == linked:                
+                isrepeat = 1
+                                      
+        if isrepeat == 0:
+            self.collection.insert(dict(item))
+            return item
+            
+        else:
+            print('chongfu')
+
+          
+		 
+		 
+
 
 
 
@@ -37,13 +68,7 @@ class WubatcPipeline(object):
     def close_spider(self, spider):
         self.exporter.finish_exporting()
         self.file.close()
-'''
-		
- 		
-		
-		
-		
-'''
+
     # 将 Item 实例导出到 json 文件
     def process_item(self, item, spider):
         self.exporter.export_item(item)

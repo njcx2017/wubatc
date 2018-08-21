@@ -30,7 +30,7 @@ class WubaSpider(scrapy.Spider):
             item['link'] = sel.xpath('a/@href').extract()
 #            item['desc'] = sel.xpath('text()').extract()
             yield item
-         
+'''         
     with open("E:\wubatc\wuba.json",'r',encoding='UTF-8') as load_f:
         load_dict = json.load(load_f)
         
@@ -73,4 +73,4 @@ class WubaSpider(scrapy.Spider):
     except smtplib.SMTPException as e:
         print(e)
        
-
+'''
