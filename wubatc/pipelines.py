@@ -33,9 +33,9 @@ class WubatcPipeline(object):
 
         firstdata = self.collection.find({},{"link":1,"_id":0}).limit(20)
         linked =item['link']
-        
+        isrepeat = 0
         for i in firstdata:
-            repeat = 0
+            
             if i['link'] == linked:                
                 isrepeat = 1
                                       
