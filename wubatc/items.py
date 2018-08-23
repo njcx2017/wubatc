@@ -11,4 +11,5 @@ import scrapy
 class WubatcItem(scrapy.Item):
     title = scrapy.Field()
     link = scrapy.Field()
+    datetime = scrapy.Field()
 #    desc = scrapy.Field()

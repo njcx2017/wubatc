@@ -15,24 +15,17 @@ class WubatcPipeline(object):
         connection = pymongo.MongoClient(settings.get('MONGODB_SERVER'),settings.get('MONGODB_PORT'))
         db = connection[settings.get('MONGODB_DB')]
         self.collection = db[settings.get('MONGODB_COLLECTION')]
-        
-    
-        
-        
-	
-	
-        
+        	        
 	
     def process_item(self, item, spider):
 #        self.collection.insert(dict(item))
 #        return item
 
 
-
-	
-
         firstdata = self.collection.find({},{"link":1,"_id":0}).limit(20)
         linked =item['link']
+
+        
         isrepeat = 0
         for i in firstdata:
             
@@ -45,33 +38,3 @@ class WubatcPipeline(object):
             
         else:
             print('chongfu')
-
-          
-		 
-		 
-
-
-
-
-
-
-
-'''
-    # 调用 scrapy 提供的 json exporter 导出 json 文件
-    def __init__(self):
-        self.file = open('wuba.json', 'wb')
-        # 初始化 exporter 实例，执行输出的文件和编码
-        self.exporter = JsonItemExporter(self.file,encoding='utf-8',ensure_ascii=False)
-        # 开启倒数
-        self.exporter.start_exporting()
-
-    def close_spider(self, spider):
-        self.exporter.finish_exporting()
-        self.file.close()
-
-    # 将 Item 实例导出到 json 文件
-    def process_item(self, item, spider):
-        self.exporter.export_item(item)
-        return item
-		
-'''    
